@@ -1,0 +1,18 @@
+{
+  "Romy": {
+    "A": ["Library","PE (Mrs. Venuto)"],
+    "B": ["Espanol","Art"],
+    "C": ["Espanol","Music"],
+    "D": ["BAND","PE (Mrs. Venuto)","Espanol"],
+    "E": ["PE (Mrs. Venuto)","Computer"],
+    "F": ["Music","Young Engineers"]
+  },
+  "Zoey": {
+    "A": ["PE (S.F)"],
+    "B": ["Art","OT Push In"],
+    "C": ["PE (S.F)","Young Engineers"],
+    "D": ["PE (S.F)"],
+    "E": ["Computer","Library"],
+    "F": ["Music","Art"]
+  }
+}

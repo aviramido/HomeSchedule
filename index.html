@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home Schedule</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #f2f5f9; margin: 0; padding: 2rem; color: #222; }
+  .wrap { max-width: 800px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 2rem; }
+  #date { font-size: 1.6rem; }
+  #time { font-size: 3rem; font-weight: 600; }
+  #letter { display: inline-block; margin-top: .5rem; font-size: 1.4rem; padding: .4rem 1.2rem; border-radius: 2rem; background: #2d6cdf; color: #fff; }
+  #letter.none { background: #888; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .card { background: #fff; border-radius: 12px; padding: 1rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
+  .card h2 { margin-top: 0; }
+  .empty { color: #888; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div id="date"></div>
+    <div id="time"></div>
+    <div id="letter" class="none">Loading…</div>
+  </header>
+  <div class="cards" id="cards"></div>
+</div>
+
+<script>
+// Local copy; at publish time, replace with a server-side refresh of the remote calendar (remote lacks CORS headers).
+const FETCH_URLS = ["calendar.ics"];
+
+let schedule = null;
+let letter = null;
+
+function ymd(d) {
+  return d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0");
+}
+
+function tick() {
+  const now = new Date();
+  document.getElementById("date").textContent =
+    now.toLocaleDateString(undefined, { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+  document.getElementById("time").textContent = now.toLocaleTimeString();
+}
+
+async function fetchText(urls) {
+  for (const u of urls) {
+    try {
+      const r = await fetch(u);
+      if (r.ok) return await r.text();
+    } catch (e) { /* try next */ }
+  }
+  throw new Error("Could not load calendar");
+}
+
+function findLetter(ics, today) {
+  const text = ics.replace(/\r?\n[ \t]/g, "");
+  for (const block of text.split("BEGIN:VEVENT").slice(1)) {
+    const start = /DTSTART[^:]*:(\d{8})/.exec(block);
+    const summary = /SUMMARY:(.*)/.exec(block);
+    if (start && summary && start[1] === today) {
+      const m = /\b([A-F])\b/i.exec(summary[1].trim());
+      if (m) return m[1].toUpperCase();
+    }
+  }
+  return null;
+}
+
+function render() {
+  const el = document.getElementById("letter");
+  el.textContent = letter ? "Day " + letter : "No letter day today";
+  el.className = letter ? "" : "none";
+  const cards = document.getElementById("cards");
+  cards.innerHTML = "";
+  if (!schedule) return;
+  for (const [name, days] of Object.entries(schedule)) {
+    const card = document.createElement("div");
+    card.className = "card";
+    const h = document.createElement("h2");
+    h.textContent = name;
+    card.appendChild(h);
+    const items = letter ? (days[letter] || []) : [];
+    if (items.length) {
+      const ul = document.createElement("ul");
+      items.forEach(a => { const li = document.createElement("li"); li.textContent = a; ul.appendChild(li); });
+      card.appendChild(ul);
+    } else {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "No activities today.";
+      card.appendChild(p);
+    }
+    cards.appendChild(card);
+  }
+}
+
+async function init() {
+  tick();
+  setInterval(tick, 1000);
+  try {
+    schedule = await (await fetch("schedule.json")).json();
+  } catch (e) {
+    document.getElementById("cards").textContent =
+      "Could not load schedule.json (serve this folder over http, e.g. 'python -m http.server').";
+  }
+  try {
+    letter = findLetter(await fetchText(FETCH_URLS), ymd(new Date()));
+  } catch (e) {
+    document.getElementById("letter").textContent = "Calendar unavailable";
+    return;
+  }
+  render();
+}
+init();
+</script>
+</body>
+</html>
