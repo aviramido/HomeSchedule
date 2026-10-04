@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home Schedule v1.2</title>
+<title>Home Schedule v1.3</title>
 <style>
-  body { font-family: system-ui, sans-serif; background: #f2f5f9; margin: 0; padding: 2rem; color: #222; }
-  .wrap { max-width: 800px; margin: 0 auto; }
+  body { font-family: system-ui, sans-serif; background: #f2f5f9; margin: 0; padding: 1rem; color: #222; }
+  .wrap { max-width: 90%; margin: 0 auto; }
   header { text-align: center; margin-bottom: 2rem; }
   #date { font-size: 1.6rem; }
   #time { font-size: 3rem; font-weight: 600; }
   #letter { display: inline-block; margin-top: .5rem; font-size: 1.4rem; padding: .4rem 1.2rem; border-radius: 2rem; background: #2d6cdf; color: #fff; }
   #letter.none { background: #888; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; font-size: 3rem; }
   .card { background: #fff; border-radius: 12px; padding: 1rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
   .card h2 { margin-top: 0; }
+  .activity-icon { margin-right: .35em; }
   .empty { color: #888; }
 </style>
 </head>
@@ -71,6 +72,21 @@ function findLetter(ics, today) {
   return null;
 }
 
+function iconForActivity(activity) {
+  if (/^PE\b/i.test(activity)) return "⚽";
+  const icons = {
+    "library": "📚",
+    "espanol": "🇪🇸",
+    "art": "🎨",
+    "music": "🎵",
+    "band": "🎺",
+    "computer": "💻",
+    "young engineers": "🤖",
+    "ot push in": "🧩"
+  };
+  return icons[activity.trim().toLowerCase()] || "📌";
+}
+
 function render() {
   const el = document.getElementById("letter");
   el.textContent = letter ? "Day " + letter : "No letter day today";
@@ -87,7 +103,19 @@ function render() {
     const items = letter ? (days[letter] || []) : [];
     if (items.length) {
       const ul = document.createElement("ul");
-      items.forEach(a => { const li = document.createElement("li"); li.textContent = a; ul.appendChild(li); });
+      items.forEach(a => {
+        const li = document.createElement("li");
+        const icon = iconForActivity(a);
+        if (icon) {
+          const iconEl = document.createElement("span");
+          iconEl.className = "activity-icon";
+          iconEl.setAttribute("aria-hidden", "true");
+          iconEl.textContent = icon;
+          li.appendChild(iconEl);
+        }
+        li.appendChild(document.createTextNode(a));
+        ul.appendChild(li);
+      });
       card.appendChild(ul);
     } else {
       const p = document.createElement("p");
