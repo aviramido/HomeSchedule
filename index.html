@@ -27,7 +27,7 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">Version 1.6</span>
+      <span id="version">Version 1.7</span>
       <span id="date"></span>
       <span id="time"></span>      
     </div>
@@ -106,11 +106,12 @@ function render() {
   const cards = document.getElementById("cards");
   cards.innerHTML = "";
   if (!schedule) return;
+  const today = (new Date()).getDay();
   for (const [name, days] of Object.entries(schedule)) {
     const card = document.createElement("div");
     card.className = "card";
     const h = document.createElement("h2");
-    h.textContent = name;
+    h.textContent = name + " - " + (today===0 || today===6 ? "No School" : (today===2 || today===3 || today===4 ? "Rye Rec" : "Bus"));
     card.appendChild(h);
     const items = letter ? (days[letter] || []) : [];
     if (items.length) {
