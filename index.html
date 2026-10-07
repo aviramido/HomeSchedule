@@ -17,20 +17,27 @@
   .card h2 { margin-top: 0; }
   .activity-icon { margin-right: .35em; }
   .empty { color: #888; }
+  .future-cards { font-size: 1.5rem; }
+  .future-cards .card h2 { font-size: 1.5rem; }
+  .future-cards h3 { margin-bottom: 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div>
-      <span id="version">Version 1.5</span>
-      <span id="date"></span>
-      <span id="time"></span><br />
       <span id="letter" class="none">Loading…</span>
+      <span id="version">Version 1.6</span>
+      <span id="date"></span>
+      <span id="time"></span>      
     </div>
     
   </header>
   <div class="cards" id="cards"></div>
+  <section aria-labelledby="future-heading">
+    <h2 id="future-heading">Next 4 Days</h2>
+    <div class="cards future-cards" id="future-cards"></div>
+  </section>
 </div>
 
 <script>
@@ -41,6 +48,7 @@ const FETCH_URLS = ["calendar.ics","https://bmprss.blindbrook.org/fs/calendar-ma
 
 let schedule = null;
 let letter = null;
+let calendar = null;
 
 function ymd(d) {
   return d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0");
@@ -129,6 +137,63 @@ function render() {
     }
     cards.appendChild(card);
   }
+
+  const futureCards = document.getElementById("future-cards");
+  futureCards.innerHTML = "";
+  const date = new Date();
+  let futureDays = 0;
+  while (futureDays < 4) {
+    date.setDate(date.getDate() + 1);
+    if (date.getDay() === 0 || date.getDay() === 6) continue;
+    futureDays++;
+
+    const dateKey = ymd(date);
+    const futureLetter = findLetter(calendar, dateKey);
+    const card = document.createElement("div");
+    card.className = "card";
+    const heading = document.createElement("h2");
+    heading.textContent = date.toLocaleDateString(undefined, {
+      weekday: "long",
+      month: "long",
+      day: "numeric"
+    }) + (futureLetter ? " — Day " + futureLetter : "");
+    card.appendChild(heading);
+
+    if (futureLetter) {
+      for (const [name, days] of Object.entries(schedule)) {
+        const person = document.createElement("h3");
+        person.textContent = name;
+        card.appendChild(person);
+        const items = days[futureLetter] || [];
+        if (items.length) {
+          const ul = document.createElement("ul");
+          items.forEach(activity => {
+            const li = document.createElement("li");
+            const icon = iconForActivity(activity);
+            const iconEl = document.createElement("span");
+            iconEl.className = "activity-icon";
+            iconEl.setAttribute("aria-hidden", "true");
+            iconEl.textContent = icon;
+            li.appendChild(iconEl);
+            li.appendChild(document.createTextNode(activity));
+            ul.appendChild(li);
+          });
+          card.appendChild(ul);
+        } else {
+          const empty = document.createElement("p");
+          empty.className = "empty";
+          empty.textContent = "No activities.";
+          card.appendChild(empty);
+        }
+      }
+    } else {
+      const empty = document.createElement("p");
+      empty.className = "empty";
+      empty.textContent = "🎉 No school";
+      card.appendChild(empty);
+    }
+    futureCards.appendChild(card);
+  }
 }
 
 async function init() {
@@ -141,7 +206,8 @@ async function init() {
       "Could not load schedule.json (serve this folder over http, e.g. 'python -m http.server').";
   }
   try {
-    letter = findLetter(await fetchText(FETCH_URLS), ymd(new Date()));
+    calendar = await fetchText(FETCH_URLS);
+    letter = findLetter(calendar, ymd(new Date()));
   } catch (e) {
     document.getElementById("letter").textContent = "Calendar unavailable";
     return;
