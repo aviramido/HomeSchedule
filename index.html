@@ -28,7 +28,7 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">(1.7)</span>
+      <span id="version">(1.8)</span>
       <span id="howToGetHome"></span>
       <div><span id="date"></span> - <span id="time"></span></div>
     </div>
@@ -109,7 +109,7 @@ function render() {
   if (!schedule) return;
   const today = (new Date()).getDay();
   document.getElementById("howToGetHome").textContent =
-    (today===0 || today===6 ? "🎉 No School 🎉" : (today===2 || today===3 || today===4 ? "Stay in Rye Rec" : "🚌Come home on the Bus🚌"));
+    (today===0 || today===6 ? "🎉 No School 🎉" : (today===2 || today===3 || today===4 ? "🛝 Stay in Rye Rec 🛝" : "🚌 Come home on the Bus 🚌"));
   for (const [name, days] of Object.entries(schedule)) {
     const card = document.createElement("div");
     card.className = "card";
