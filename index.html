@@ -9,9 +9,10 @@
   .wrap { max-width: 90%; margin: 0 auto; }
   header { text-align: center; margin-bottom: 2rem; }
   #date { font-size: 1.6rem; }
-  #time { font-size: 3rem; font-weight: 600; }
+  #time { font-size: 1.6rem; font-weight: 600; text-align: center; }
   #letter { display: inline-block; margin-top: .5rem; font-size: 1.4rem; padding: .4rem 1.2rem; border-radius: 2rem; background: #2d6cdf; color: #fff; }
   #letter.none { background: #888; }
+  #howToGetHome { display: inline-block; margin-top: .5rem; font-size: 1.4rem; padding: .4rem 1.2rem; border-radius: 2rem; background: #2d6cdf; color: #fff; }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; font-size: 3rem; }
   .card { background: #fff; border-radius: 12px; padding: 1rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
   .card h2 { margin-top: 0; }
@@ -27,9 +28,9 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">Version 1.7</span>
-      <span id="date"></span>
-      <span id="time"></span>      
+      <span id="version">(1.7)</span>
+      <span id="howToGetHome"></span>
+      <div><span id="date"></span> - <span id="time"></span></div>
     </div>
     
   </header>
@@ -106,12 +107,14 @@ function render() {
   const cards = document.getElementById("cards");
   cards.innerHTML = "";
   if (!schedule) return;
-  const today = (new Date()).getDay();
+  const today = 1;//(new Date()).getDay();
+  document.getElementById("howToGetHome").textContent =
+    (today===0 || today===6 ? "🎉 No School 🎉" : (today===2 || today===3 || today===4 ? "Stay in Rye Rec" : "🚌Come home on the Bus🚌"));
   for (const [name, days] of Object.entries(schedule)) {
     const card = document.createElement("div");
     card.className = "card";
     const h = document.createElement("h2");
-    h.textContent = name + " - " + (today===0 || today===6 ? "No School" : (today===2 || today===3 || today===4 ? "Rye Rec" : "Bus"));
+    h.textContent = name;;
     card.appendChild(h);
     const items = letter ? (days[letter] || []) : [];
     if (items.length) {
