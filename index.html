@@ -107,7 +107,7 @@ function render() {
   const cards = document.getElementById("cards");
   cards.innerHTML = "";
   if (!schedule) return;
-  const today = 1;//(new Date()).getDay();
+  const today = (new Date()).getDay();
   document.getElementById("howToGetHome").textContent =
     (today===0 || today===6 ? "🎉 No School 🎉" : (today===2 || today===3 || today===4 ? "Stay in Rye Rec" : "🚌Come home on the Bus🚌"));
   for (const [name, days] of Object.entries(schedule)) {
