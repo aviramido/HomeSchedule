@@ -18,9 +18,16 @@
   .card h2 { margin-top: 0; }
   .activity-icon { margin-right: .35em; }
   .empty { color: #888; }
-  .future-cards { font-size: 1.5rem; }
-  .future-cards .card h2 { font-size: 1.5rem; }
-  .future-cards h3 { margin-bottom: 0; }
+  #future-heading { font-size: 2rem; margin-top:3rem;margin-bottom: 0.5rem; color:#555;}
+  /*.future-cards, .future-cards .card h2, .future-cards .card h3 { font-size: 1.3rem; font-weight: 400; margin:0; color:#555;}*/
+  .future-cards .card{
+    color:#555;
+    h2{ font-size: 1.3rem; font-weight: 600; }
+    h3{ font-size: 1.3rem; font-weight: 400; margin:0; margin-top:1rem;}
+    ul{ font-size: 1.3rem; font-weight: 400; margin:0; }
+    .empty { font-size: 3rem;color: #00840b; }
+  } 
+  .reminder { color: #c70000ca; font-size:80%; margin-left: .5rem; font-weight: 600; display: inline-block; }
 </style>
 </head>
 <body>
@@ -114,7 +121,20 @@ function render() {
     const card = document.createElement("div");
     card.className = "card";
     const h = document.createElement("h2");
-    h.textContent = name;;
+    h.textContent = name;
+    if ((name.toLocaleLowerCase() == "romy" && letter.toLocaleLowerCase() == "d")){
+      const reminder = document.createElement("span");
+      reminder.className = "reminder";
+      reminder.textContent = " - FLUTE";
+      h.appendChild(reminder);
+    }
+    if ((name.toLocaleLowerCase() == "zoey" && today===5)){
+      const reminder = document.createElement("span");
+      reminder.className = "reminder";
+      reminder.textContent = " - Homework Sheet";
+      h.appendChild(reminder);
+    }
+
     card.appendChild(h);
     const items = letter ? (days[letter] || []) : [];
     if (items.length) {
