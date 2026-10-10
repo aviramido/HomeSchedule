@@ -35,7 +35,7 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">(2.0)</span>
+      <span id="version">(2.1)</span>
       <span id="howToGetHome"></span>
       <div><span id="date"></span> - <span id="time"></span></div>
     </div>
@@ -122,7 +122,7 @@ function render() {
     card.className = "card";
     const h = document.createElement("h2");
     h.textContent = name;
-    if ((name.toLocaleLowerCase() == "romy" && letter.toLocaleLowerCase() == "d")){
+    if (letter != null && ((name.toLocaleLowerCase() == "romy" && letter.toLocaleLowerCase() == "d"))){
       const reminder = document.createElement("span");
       reminder.className = "reminder";
       reminder.textContent = " - FLUTE";
@@ -156,7 +156,7 @@ function render() {
     } else {
       const p = document.createElement("p");
       p.className = "empty";
-      p.textContent = "No activities today.";
+      p.textContent = "🎉No activities today.🎉";
       card.appendChild(p);
     }
     cards.appendChild(card);
