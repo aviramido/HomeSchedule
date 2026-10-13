@@ -13,6 +13,8 @@
   #letter { display: inline-block; margin-top: .5rem; font-size: 2.5rem; padding: .4rem 1.2rem; border-radius: 2rem; background: #2d6cdf; color: #fff; }
   #letter.none { background: #888; }
   #howToGetHome { display: inline-block; margin-top: .5rem; font-size: 2.5rem; padding: .4rem 1.2rem; border-radius: 2rem; background: #2d6cdf; color: #fff; }
+  #lunch {display: inline-block; margin-top: .5rem; font-size: 1.5rem; padding: .4rem 1.2rem; border-radius: 2rem; background: #9f9fa0; color: #000;  }
+  #lunch h2 { display: inline; margin: 0 .35rem 0 0; font-size: inherit; }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; font-size: 3rem; }
   .card { background: #fff; border-radius: 12px; padding: 1rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,.1); }
   .card h2 { margin-top: 0; }
@@ -35,9 +37,10 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">(2.1)</span>
+      <span id="version">(2.2)</span>
       <span id="howToGetHome"></span>
       <div><span id="date"></span> - <span id="time"></span></div>
+      <div id="lunch"></div>
     </div>
     
   </header>
@@ -105,6 +108,38 @@ function iconForActivity(activity) {
     "ot push in": "🧩"
   };
   return icons[activity.trim().toLowerCase()] || "📌";
+}
+
+function renderLunch(menuData) {
+  const lunch = document.getElementById("lunch");
+  const today = new Date();
+  const dateKey = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+  ].join("-");
+  const todayMenu = menuData.menu.find(item => item.date === dateKey);
+
+  lunch.replaceChildren();
+  const heading = document.createElement("h2");
+  heading.textContent = "Lunch:";
+  lunch.appendChild(heading);
+
+  if (!todayMenu) {
+    lunch.appendChild(document.createTextNode("Lunch data might need to be updated"));
+    return;
+  }
+  if (!todayMenu.school_open) {
+    lunch.appendChild(document.createTextNode(todayMenu.holiday || "🎉 No school 🎉"));
+    return;
+  }
+
+  const details = [todayMenu.main_entree, ...(todayMenu.sides || [])].filter(Boolean);
+  if (todayMenu.side_options && todayMenu.side_options.length) {
+    details.push(todayMenu.side_options.join(", "));
+  }
+  if (todayMenu.milk) details.push(todayMenu.milk);
+  lunch.appendChild(document.createTextNode(details.join(" · ") || "Menu not listed."));
 }
 
 function render() {
@@ -223,6 +258,12 @@ function render() {
 async function init() {
   tick();
   setInterval(tick, 1000);
+  try {
+    const lunchData = await (await fetch("lunch.json")).json();
+    renderLunch(lunchData);
+  } catch (e) {
+    document.getElementById("lunch").textContent = "Could not load lunch.json.";
+  }
   try {
     schedule = await (await fetch("schedule.json")).json();
   } catch (e) {
