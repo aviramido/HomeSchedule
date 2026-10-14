@@ -29,6 +29,7 @@
   .future-cards .card h3{ font-size: 1.3rem; font-weight: 400; margin:0; margin-top:1rem;}
   .future-cards .card ul{ font-size: 1.3rem; font-weight: 400; margin:0; }
   .future-cards .card .empty { font-size: 3rem;color: #00840b; }
+  .futureLunch { font-size: 0.8rem; line-height: 0.8rem; }
   .reminder { color: #c70000ca; font-size:80%; margin-left: .5rem; font-weight: 600; display: inline-block; }
 </style>
 </head>
@@ -37,7 +38,7 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">(2.2)</span>
+      <span id="version">(2.3)</span>
       <span id="howToGetHome"></span>
       <div><span id="date"></span> - <span id="time"></span></div>
       <div id="lunch"></div>
@@ -110,28 +111,34 @@ function iconForActivity(activity) {
   return icons[activity.trim().toLowerCase()] || "📌";
 }
 
-function renderLunch(menuData) {
+function renderLunch() {
   const lunch = document.getElementById("lunch");
   const today = new Date();
-  const dateKey = [
-    today.getFullYear(),
-    String(today.getMonth() + 1).padStart(2, "0"),
-    String(today.getDate()).padStart(2, "0")
-  ].join("-");
-  const todayMenu = menuData.menu.find(item => item.date === dateKey);
-
+  const todayMenu = getLunchForDate(today);
   lunch.replaceChildren();
   const heading = document.createElement("h2");
   heading.textContent = "Lunch:";
   lunch.appendChild(heading);
+  
+  lunch.appendChild(document.createTextNode(todayMenu));
+}
 
+function getLunchForDate(date) {
+  if (!g_LunchData) return null;
+  if (!date) return null;
+  const dk = [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0")
+  ].join("-");
+  const todayMenu = g_LunchData.menu.find(item => item.date === dk);
+  let toReturn = "";
   if (!todayMenu) {
-    lunch.appendChild(document.createTextNode("Lunch data might need to be updated"));
-    return;
+    toReturn = "Lunch data might need to be updated";
+    return toReturn;
   }
   if (!todayMenu.school_open) {
-    lunch.appendChild(document.createTextNode(todayMenu.holiday || "🎉 No school 🎉"));
-    return;
+    return null;
   }
 
   const details = [todayMenu.main_entree, ...(todayMenu.sides || [])].filter(Boolean);
@@ -139,7 +146,8 @@ function renderLunch(menuData) {
     details.push(todayMenu.side_options.join(", "));
   }
   if (todayMenu.milk) details.push(todayMenu.milk);
-  lunch.appendChild(document.createTextNode(details.join(" · ") || "Menu not listed."));
+  toReturn += (details.join(" · ") || "Menu not listed.");
+  return toReturn;
 }
 
 function render() {
@@ -217,6 +225,13 @@ function render() {
       day: "numeric"
     }) + (futureLetter ? " — Day " + futureLetter : "");
     card.appendChild(heading);
+    const lunchForDay = getLunchForDate(date);
+    if (lunchForDay) {
+      const lunchEl = document.createElement("p");
+      lunchEl.className = "futureLunch";
+      lunchEl.textContent = "🍽️ " + lunchForDay;
+      card.appendChild(lunchEl);
+    }
 
     if (futureLetter) {
       for (const [name, days] of Object.entries(schedule)) {
@@ -255,12 +270,14 @@ function render() {
   }
 }
 
+let g_LunchData = null;
+
 async function init() {
   tick();
   setInterval(tick, 1000);
   try {
-    const lunchData = await (await fetch("lunch.json")).json();
-    renderLunch(lunchData);
+    g_LunchData = await (await fetch("lunch.json")).json();
+    renderLunch(g_LunchData);
   } catch (e) {
     document.getElementById("lunch").textContent = "Could not load lunch.json.";
   }
