@@ -38,7 +38,7 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">(2.3)</span>
+      <span id="version">(2.4)</span>
       <span id="howToGetHome"></span>
       <div><span id="date"></span> - <span id="time"></span></div>
       <div id="lunch"></div>
@@ -106,7 +106,9 @@ function iconForActivity(activity) {
     "band": "🎺",
     "computer": "💻",
     "young engineers": "🤖",
-    "ot push in": "🧩"
+    "ot push in": "🧩",
+    "gymnastics": "🤸‍♂️",
+    "soccer": "⚽"
   };
   return icons[activity.trim().toLowerCase()] || "📌";
 }
@@ -134,7 +136,11 @@ function getLunchForDate(date) {
   const todayMenu = g_LunchData.menu.find(item => item.date === dk);
   let toReturn = "";
   if (!todayMenu) {
-    toReturn = "Lunch data might need to be updated";
+    if (date.getDay() === 0 || date.getDay() === 6) {
+      toReturn = "No school today";
+    } else {
+      toReturn = "Lunch data might need to be updated";
+    }
     return toReturn;
   }
   if (!todayMenu.school_open) {
@@ -197,10 +203,40 @@ function render() {
       });
       card.appendChild(ul);
     } else {
-      const p = document.createElement("p");
-      p.className = "empty";
-      p.textContent = "🎉No activities today.🎉";
-      card.appendChild(p);
+      if ((name.toLocaleLowerCase() == "romy" || name.toLocaleLowerCase() == "zoey") && today===0){
+        const ul = document.createElement("ul");
+        const li = document.createElement("li");
+        const icon = iconForActivity("gymnastics");
+        if (icon) {
+          const iconEl = document.createElement("span");
+          iconEl.className = "activity-icon";
+          iconEl.setAttribute("aria-hidden", "true");
+          iconEl.textContent = icon;
+          li.appendChild(iconEl);
+        }
+        li.appendChild(document.createTextNode("Gymnastics"));
+        ul.appendChild(li);
+        card.appendChild(ul);
+      } else if (name.toLocaleLowerCase() == "zoey" && today===6){
+          const ul = document.createElement("ul");
+          const li = document.createElement("li");
+          const icon = iconForActivity("soccer");
+          if (icon) {
+            const iconEl = document.createElement("span");
+            iconEl.className = "activity-icon";
+            iconEl.setAttribute("aria-hidden", "true");
+            iconEl.textContent = icon;
+            li.appendChild(iconEl);
+          }
+          li.appendChild(document.createTextNode("Soccer"));
+          ul.appendChild(li);
+          card.appendChild(ul);
+      } else {
+        const p = document.createElement("p");
+        p.className = "empty";
+        p.textContent = "🎉No activities today.🎉";
+        card.appendChild(p);
+      }
     }
     cards.appendChild(card);
   }
