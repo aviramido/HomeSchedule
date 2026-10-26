@@ -1,18 +1,18 @@
 {
   "Romy": {
-    "A": ["Library","PE (Mrs. Venuto)"],
-    "B": ["Espanol","Art"],
-    "C": ["Espanol","Music"],
-    "D": ["Band","PE (Mrs. Venuto)","Espanol"],
-    "E": ["PE (Mrs. Venuto)","Computer"],
-    "F": ["Music","Young Engineers"]
+    "A": ["12:25 - Library","1:45 - PE (Mrs. Venuto)"],
+    "B": ["12:30 - Espanol","1:45 - Art"],
+    "C": ["8:40 - Espanol","1:45 - Music"],
+    "D": ["Band","1:45 - PE (Mrs. Venuto)","2:35 - Espanol"],
+    "E": ["8:40 - PE (Mrs. Venuto)","1:45 - Computer"],
+    "F": ["8:40 - Music","1:45 - Young Engineers"]
   },
   "Zoey": {
-    "A": ["PE (S.F)"],
-    "B": ["Art"],
-    "C": ["PE (S.F)","Young Engineers"],
-    "D": ["PE (S.F)"],
-    "E": ["Computer","Library"],
-    "F": ["Music","Art"]
+    "A": ["9:20 - PE (S.F)"],
+    "B": ["9:20 - Art"],
+    "C": ["8:40 - PE (S.F)","9:20 - Young Engineers"],
+    "D": ["9:20 - PE (S.F)"],
+    "E": ["9:20 - Computer","10:00 - Library"],
+    "F": ["9:20 - Music","10:45 - Art"]
   }
 }

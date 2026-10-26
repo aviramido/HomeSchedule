@@ -38,7 +38,7 @@
   <header>
     <div>
       <span id="letter" class="none">Loading…</span>
-      <span id="version">(2.4)</span>
+      <span id="version">(2.5)</span>
       <span id="howToGetHome"></span>
       <div><span id="date"></span> - <span id="time"></span></div>
       <div id="lunch"></div>
@@ -95,10 +95,7 @@ function findLetter(ics, today) {
   }
   return null;
 }
-
-function iconForActivity(activity) {
-  if (/^PE\b/i.test(activity)) return "⚽";
-  const icons = {
+const icons = {
     "library": "📚",
     "espanol": "🇪🇸",
     "art": "🎨",
@@ -108,9 +105,13 @@ function iconForActivity(activity) {
     "young engineers": "🤖",
     "ot push in": "🧩",
     "gymnastics": "🤸‍♂️",
-    "soccer": "⚽"
+    "soccer": "⚽",
+    "pe": "⚽"
   };
-  return icons[activity.trim().toLowerCase()] || "📌";
+function iconForActivity(activity) {
+  const key = activity.trim().toLowerCase().substring(activity.indexOf(" - ") + 3);
+  if (/^pe\b/i.test(key)) return "⚽"; //for PE clases with teacher name...
+  return icons[key] || "📌";
 }
 
 function renderLunch() {
