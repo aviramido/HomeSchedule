@@ -1,48 +1,20 @@
 {
   "school": "Blind Brook Ridge Street Elementary",
-  "month": "October",
+  "month": "November",
   "year": 2026,
   "daily_alternatives": [
-    "Yogurt Lunch: 4oz Yogurt, Cheese Stick, Graham Crackers",
+    "Yogurt Lunch: (4oz Yogurt, Cheese Stick, Graham Crackers)",
     "Salad Lunch",
-    "Assorted Sandwiches: Ham & Cheese, Turkey & Cheese, Cheese",
+    "Assorted Sandwiches: Ham & Cheese, Turkey & Cheese, Cheese, Sunbutter and Jelly",
     "Bagel Lunch: WG Bagel with Butter or Cream Cheese, 2 Cheese Sticks"
   ],
   "menu": [
     {
-      "date": "2026-10-01",
-      "day_of_week": "Thursday",
-      "school_open": true,
-      "main_entree": "Crispy Tacos",
-      "sides": [
-        "Black Beans",
-        "Brown Rice",
-        "Fresh Banana"
-      ],
-      "side_options": [
-        "Baby Carrots"
-      ],
-      "milk": "Unflavored 1% Milk"
-    },
-    {
-      "date": "2026-10-02",
-      "day_of_week": "Friday",
-      "school_open": true,
-      "main_entree": "Classic Cheese Pizza",
-      "sides": [
-        "Cinnamon Applesauce"
-      ],
-      "side_options": [
-        "Caesar Salad",
-        "Baby Carrots"
-      ],
-      "milk": "Unflavored 1% Milk"
-    },
-    {
-      "date": "2026-10-05",
+      "date": "2026-11-02",
       "day_of_week": "Monday",
       "school_open": true,
-      "main_entree": "Mozzarella Sticks With Tomato Sauce Dip",
+      "holiday": null,
+      "main_entree": "Mozzarella Sticks With Marinara Sauce",
       "sides": [
         "Roasted Broccoli",
         "Fresh Fruit Cup"
@@ -53,9 +25,10 @@
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-06",
+      "date": "2026-11-03",
       "day_of_week": "Tuesday",
       "school_open": true,
+      "holiday": null,
       "main_entree": "Chicken Nuggets With Oven Baked Fries",
       "sides": [
         "Green Beans",
@@ -67,63 +40,72 @@
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-07",
+      "date": "2026-11-04",
       "day_of_week": "Wednesday",
       "school_open": true,
-      "main_entree": "Homemade Mac & Cheese",
+      "holiday": null,
+      "main_entree": "Pasta with Meat Sauce",
       "sides": [
+        "Roasted Mixed Veggies",
         "Honeydew and Cantaloupe Cup"
       ],
       "side_options": [
-        "Roasted Mixed Veggies",
         "Celery"
       ],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-08",
+      "date": "2026-11-05",
       "day_of_week": "Thursday",
       "school_open": true,
-      "main_entree": "Beef Hot Dog on Bun With Sweet Potato Fries",
+      "holiday": null,
+      "main_entree": "Crispy Tacos",
       "sides": [
+        "Black Beans",
+        "Brown Rice",
         "Fresh Banana"
       ],
-      "side_options": [
-        "Baked Beans",
-        "Celery"
-      ],
+      "side_options": [],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-09",
+      "date": "2026-11-06",
       "day_of_week": "Friday",
       "school_open": true,
+      "holiday": null,
       "main_entree": "Classic Cheese Pizza",
       "sides": [
-        "Fresh Pear"
+        "Cinnamon Applesauce"
       ],
       "side_options": [
-        "Garden Salad",
-        "Celery"
+        "Caesar Salad",
+        "Baby Carrots"
       ],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-12",
+      "date": "2026-11-09",
       "day_of_week": "Monday",
-      "school_open": false,
-      "holiday": "Columbus Day",
-      "main_entree": null,
-      "sides": [],
+      "school_open": true,
+      "holiday": null,
+      "main_entree": "Grilled Cheese Sandwich Meltdown Café",
+      "sides": [
+        "Sweet Potato Fries",
+        "Mixed Vegetables",
+        "Grape Tomatoes",
+        "Fresh Grapes"
+      ],
       "side_options": [],
       "milk": null
     },
     {
-      "date": "2026-10-13",
+      "date": "2026-11-10",
       "day_of_week": "Tuesday",
       "school_open": true,
-      "main_entree": "Crispy Chicken Patty With Crispy Potato Puffs",
+      "holiday": null,
+      "main_entree": "Cheeseburger",
       "sides": [
+        "Oven Baked Fries",
         "Mixed Vegetables",
         "Sliced Oranges"
       ],
@@ -133,123 +115,51 @@
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-14",
+      "date": "2026-11-11",
       "day_of_week": "Wednesday",
-      "school_open": true,
-      "main_entree": "Pasta with Meat Sauce With Whole Wheat Dinner Roll",
-      "sides": [
-        "Green Beans",
-        "Fresh Grapes"
-      ],
-      "side_options": [
-        "Grape Tomatoes"
-      ],
-      "milk": "Unflavored 1% Milk"
+      "school_open": false,
+      "holiday": "Veterans Day",
+      "main_entree": null,
+      "sides": [],
+      "side_options": [],
+      "milk": null
     },
     {
-      "date": "2026-10-15",
+      "date": "2026-11-12",
       "day_of_week": "Thursday",
       "school_open": true,
-      "main_entree": "Nachos Grande",
-      "sides": [
-        "Black Beans",
-        "Brown Rice"
-      ],
-      "side_options": [
-        "Fresh Banana",
-        "Grape Tomatoes"
-      ],
-      "milk": "Unflavored 1% Milk"
-    },
-    {
-      "date": "2026-10-16",
-      "day_of_week": "Friday",
-      "school_open": true,
-      "main_entree": "Classic Cheese Pizza",
-      "sides": [
-        "Fresh Apple"
-      ],
-      "side_options": [
-        "Caesar Salad",
-        "Grape Tomatoes"
-      ],
-      "milk": "Fat Free Chocolate Milk"
-    },
-    {
-      "date": "2026-10-19",
-      "day_of_week": "Monday",
-      "school_open": true,
-      "main_entree": "French Toast With Sausage Patty",
-      "sides": [
-        "Fresh Fruit Cup"
-      ],
-      "side_options": [
-        "Baked Sweet Potato",
-        "Baby Carrots"
-      ],
-      "milk": "Unflavored 1% Milk"
-    },
-    {
-      "date": "2026-10-20",
-      "day_of_week": "Tuesday",
-      "school_open": true,
-      "main_entree": "Chicken and Waffles With Crispy Potato Puffs",
-      "sides": [
-        "Fresh Apple"
-      ],
-      "side_options": [
-        "Snow Peas",
-        "Baby Carrots"
-      ],
-      "milk": "Unflavored 1% Milk"
-    },
-    {
-      "date": "2026-10-21",
-      "day_of_week": "Wednesday",
-      "school_open": true,
-      "main_entree": "Homemade Baked Pasta with Cheese",
-      "sides": [
-        "Pineapple"
-      ],
-      "side_options": [
-        "Roasted Broccoli",
-        "Baby Carrots"
-      ],
-      "milk": "Unflavored 1% Milk"
-    },
-    {
-      "date": "2026-10-22",
-      "day_of_week": "Thursday",
-      "school_open": true,
+      "holiday": null,
       "main_entree": "Beef Hot Dog on Bun With Sweet Potato Fries",
       "sides": [
         "Fresh Banana"
       ],
       "side_options": [
         "Baked Beans",
-        "Baby Carrots"
+        "Celery"
       ],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-23",
+      "date": "2026-11-13",
       "day_of_week": "Friday",
       "school_open": true,
+      "holiday": null,
       "main_entree": "Classic Cheese Pizza",
       "sides": [
-        "Watermelon Slices"
+        "Fresh Pear"
       ],
       "side_options": [
-        "Garden Salad",
-        "Baby Carrots"
+        "Side Salad",
+        "Celery"
       ],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-26",
+      "date": "2026-11-16",
       "day_of_week": "Monday",
       "school_open": true,
-      "main_entree": "Cheesy Stuffed Bread Sticks With Tomato Sauce Dip",
+      "holiday": null,
+      "main_entree": "Cheesy Stuffed Bread Sticks With Marinara Sauce",
       "sides": [
         "Steamed Peas",
         "Fresh Banana"
@@ -260,62 +170,138 @@
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-27",
+      "date": "2026-11-17",
       "day_of_week": "Tuesday",
       "school_open": true,
-      "main_entree": "Classic Beef Burger With Sweet Potato Fries",
+      "holiday": null,
+      "main_entree": "Chicken and Waffles With Crispy Potato Puffs",
       "sides": [
-        "Cauliflower Popcorn",
-        "Sliced Oranges"
+        "Snow Peas",
+        "Fresh Apple"
       ],
-      "side_options": [
-        "Cucumber Coins"
-      ],
+      "side_options": [],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-28",
+      "date": "2026-11-18",
       "day_of_week": "Wednesday",
       "school_open": true,
+      "holiday": null,
       "main_entree": "Homemade Pasta & Meatballs",
       "sides": [
+        "Green Beans",
         "Fresh Grapes"
       ],
       "side_options": [
-        "Green Beans",
-        "Cucumber Coins"
+        "Grape Tomatoes"
       ],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-29",
+      "date": "2026-11-19",
       "day_of_week": "Thursday",
       "school_open": true,
-      "main_entree": "Crispy Tacos",
+      "holiday": null,
+      "main_entree": "Nachos Grande",
       "sides": [
         "Black Beans",
-        "Brown Rice",
         "Fresh Banana"
       ],
       "side_options": [
-        "Cucumber Coins"
+        "Grape Tomatoes"
       ],
       "milk": "Unflavored 1% Milk"
     },
     {
-      "date": "2026-10-30",
+      "date": "2026-11-20",
       "day_of_week": "Friday",
       "school_open": true,
-      "holiday": "Halloween Observed",
+      "holiday": null,
       "main_entree": "Classic Cheese Pizza",
       "sides": [
         "Fresh Apple"
       ],
       "side_options": [
         "Caesar Salad",
-        "Cucumber Coins"
+        "Grape Tomatoes"
       ],
       "milk": "Fat Free Chocolate Milk"
+    },
+    {
+      "date": "2026-11-23",
+      "day_of_week": "Monday",
+      "school_open": true,
+      "holiday": null,
+      "main_entree": "French Toast With Sausage Patty",
+      "sides": [
+        "Baked Sweet Potato",
+        "Fresh Fruit Cup"
+      ],
+      "side_options": [],
+      "milk": "Unflavored 1% Milk"
+    },
+    {
+      "date": "2026-11-24",
+      "day_of_week": "Tuesday",
+      "school_open": true,
+      "holiday": null,
+      "main_entree": "Chicken Nuggets With Oven Baked Fries",
+      "sides": [
+        "Green Beans",
+        "Sliced Oranges"
+      ],
+      "side_options": [
+        "Celery"
+      ],
+      "milk": "Unflavored 1% Milk"
+    },
+    {
+      "date": "2026-11-25",
+      "day_of_week": "Wednesday",
+      "school_open": true,
+      "holiday": null,
+      "main_entree": "Homemade Baked Pasta with Cheese",
+      "sides": [
+        "Roasted Broccoli",
+        "Pineapple"
+      ],
+      "side_options": [],
+      "milk": "Unflavored 1% Milk"
+    },
+    {
+      "date": "2026-11-26",
+      "day_of_week": "Thursday",
+      "school_open": false,
+      "holiday": "Thanksgiving Day",
+      "main_entree": null,
+      "sides": [],
+      "side_options": [],
+      "milk": null
+    },
+    {
+      "date": "2026-11-27",
+      "day_of_week": "Friday",
+      "school_open": false,
+      "holiday": "School Closed Today",
+      "main_entree": null,
+      "sides": [],
+      "side_options": [],
+      "milk": null
+    },
+    {
+      "date": "2026-11-30",
+      "day_of_week": "Monday",
+      "school_open": true,
+      "holiday": null,
+      "main_entree": "Mozzarella Sticks With Marinara Sauce",
+      "sides": [
+        "Roasted Broccoli",
+        "Fresh Fruit Cup"
+      ],
+      "side_options": [
+        "Celery"
+      ],
+      "milk": "Unflavored 1% Milk"
     }
   ]
 }
